@@ -36,5 +36,5 @@ while running:
     screen.blit(bird_surf[bird_index], bird_rect)
     pygame.display.update()
     clock.tick(60)
-
+# torold
 pygame.quit()
