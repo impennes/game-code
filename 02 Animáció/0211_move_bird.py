@@ -7,7 +7,7 @@ HEIGHT = 620
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-bird = pygame.image.load('bird1.png')
+bird = pygame.image.load('img/bird1.png')
 bird_rect = bird.get_rect(center=(150, 300))
 bird_x = 0
 bird_y = 0
@@ -20,10 +20,10 @@ while running:
             running = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and bird_rect.left >= 0:
-        bird = pygame.image.load('bird1back.png')
+        bird = pygame.image.load('img/bird1back.png')
         bird_x = -SPEED
     elif keys[pygame.K_RIGHT] and bird_rect.right <= WIDTH:
-        bird = pygame.image.load('bird1.png')
+        bird = pygame.image.load('img/bird1.png')
         bird_x = SPEED
     else:
         bird_x = 0
