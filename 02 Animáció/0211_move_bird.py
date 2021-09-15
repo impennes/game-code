@@ -1,4 +1,5 @@
 # pygame.image.load(os.path.join('pictures', 'background.png'))
+# test@BDEG
 import pygame
 
 pygame.init()
