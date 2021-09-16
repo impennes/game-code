@@ -1,6 +1,5 @@
 import pygame
 
-
 BLUE = (0, 0, 255)
 GRAY = (127, 127, 127)
 
@@ -8,6 +7,8 @@ pygame.init()
 screen = pygame.display.set_mode((600, 300))
 background = GRAY
 
+# Négyszög rajzolása
+# pygame.draw.rect(screen, BLUE, (10, 20, 100, 50), 5, 10)
 rect_pos_x = 10
 rect_pos_y = 20
 rect = pygame.Rect(rect_pos_x, rect_pos_y, 100, 50)

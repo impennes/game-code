@@ -1,14 +1,16 @@
 import pygame
 
-pygame.init()
 WIDTH, HEIGHT = 1280, 620
+BG_COLOR = (140, 137, 246)
+BIRD_SPEED = 5
+
+pygame.init()
 # SCREEN_SIZE = (1280, 620)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
 bird_surf = pygame.image.load('img/bird1.png')
 bird_x, bird_y = 0, 300
-BIRD_SPEED = 5
 
 running = True
 while running:
@@ -16,7 +18,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill((140, 137, 246))
+    screen.fill(BG_COLOR)
 
     if bird_x <= WIDTH - 150:
         bird_x += BIRD_SPEED
