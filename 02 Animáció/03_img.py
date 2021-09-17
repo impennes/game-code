@@ -1,9 +1,10 @@
 import pygame
 
+WIDTH, HEIGHT = 1280, 620
 BG_COLOR = (140, 137, 246)
 
 pygame.init()
-screen = pygame.display.set_mode((800, 400))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # convert: PyGame könnyebben kezeli a képet, így gyorsabban fut
 bird_surf = pygame.image.load('img/bird1.png').convert_alpha()
 bird_x = 0

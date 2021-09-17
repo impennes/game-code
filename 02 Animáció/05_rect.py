@@ -1,11 +1,11 @@
 import pygame
 
-SIZE = 500, 200
+WIDTH, HEIGHT = 500, 200
 RED = (255, 0, 0)
 GRAY = (150, 150, 150)
 
 pygame.init()
-screen = pygame.display.set_mode(SIZE)
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 rect = pygame.Rect(50, 60, 200, 80)
 print(f'x={rect.x}, y={rect.y}, w={rect.w}, h={rect.h}')
@@ -20,6 +20,7 @@ while running:
 
     screen.fill(GRAY)
     pygame.draw.rect(screen, RED, rect)
+    # pygame.display.update()
     pygame.display.flip()
 
 pygame.quit()

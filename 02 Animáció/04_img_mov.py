@@ -5,7 +5,6 @@ BG_COLOR = (140, 137, 246)
 BIRD_SPEED = 5
 
 pygame.init()
-# SCREEN_SIZE = (1280, 620)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 

@@ -1,13 +1,14 @@
 import pygame
 
-pygame.init()
 WIDTH, HEIGHT = 1280, 620
+BIRD_SPEED = 5
+
+pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-bird_surf = pygame.image.load('img/bird1.png')
+bird_surf = pygame.image.load('img/bird1.png').convert_alpha()
 bird_rect = bird_surf.get_rect(center=(150, 300))
-BIRD_SPEED = 5
 
 running = True
 while running:
