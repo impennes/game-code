@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 bird = pygame.image.load('img/bird1.png')
 bird_x = WIDTH / 2
 bird_y = HEIGHT / 2
-bird_rect = bird.get_rect(center=(bird_x, bird_y))
+
 
 running = True
 while running:
