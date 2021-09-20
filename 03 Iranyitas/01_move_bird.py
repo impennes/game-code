@@ -20,13 +20,6 @@ while running:
             running = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and bird_rect.left >= 0:
-        print(f'{keys=}')
-        print(pygame.K_LEFT)
-        print(keys[pygame.K_LEFT])
-        print(keys[1073741904])
-        for index, value in enumerate(keys):
-            if value:
-                print(f'{index=}  {value=}')
         bird = pygame.image.load('../02 Animáció/img/bird1back.png')
         bird_x += -SPEED
     elif keys[pygame.K_RIGHT] and bird_rect.right <= WIDTH:

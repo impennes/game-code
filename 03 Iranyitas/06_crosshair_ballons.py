@@ -18,6 +18,7 @@ for _ in range(5):
     ballons_rect.append(ballon_rect)
 
 crosshair_surf = pygame.image.load('img/crosshair.png')
+crosshair_rect = crosshair_surf.get_rect(center=(WIDTH / 2, HEIGHT / 2))
 
 forward = True
 running = True
