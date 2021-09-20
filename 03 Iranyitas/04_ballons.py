@@ -31,7 +31,6 @@ bird_x = WIDTH / 2
 bird_y = HEIGHT / 2
 bird_index = 0
 
-ballon_out = False
 counter = 0
 forward = True
 running = True
