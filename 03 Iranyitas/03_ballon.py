@@ -8,15 +8,19 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-bird_fw_1 = pygame.image.load('img/bird1.png')
-bird_fw_2 = pygame.image.load('img/bird2.png')
-bird_fw_3 = pygame.image.load('img/bird3.png')
-bird_fw_4 = pygame.image.load('img/bird4.png')
+ballon_surf = pygame.image.load('../02 Animáció/img/ballon.png')
+ballon_rect = ballon_surf.get_rect(center=(WIDTH-100, HEIGHT/2))
+
+
+bird_fw_1 = pygame.image.load('../02 Animáció/img/bird1.png')
+bird_fw_2 = pygame.image.load('../02 Animáció/img/bird2.png')
+bird_fw_3 = pygame.image.load('../02 Animáció/img/bird3.png')
+bird_fw_4 = pygame.image.load('../02 Animáció/img/bird4.png')
 birds_fw = [bird_fw_1, bird_fw_2, bird_fw_3, bird_fw_4]
-bird_b_1 = pygame.image.load('img/bird1back.png')
-bird_b_2 = pygame.image.load('img/bird2back.png')
-bird_b_3 = pygame.image.load('img/bird3back.png')
-bird_b_4 = pygame.image.load('img/bird4back.png')
+bird_b_1 = pygame.image.load('../02 Animáció/img/bird1back.png')
+bird_b_2 = pygame.image.load('../02 Animáció/img/bird2back.png')
+bird_b_3 = pygame.image.load('../02 Animáció/img/bird3back.png')
+bird_b_4 = pygame.image.load('../02 Animáció/img/bird4back.png')
 birds_b = [bird_b_1, bird_b_2, bird_b_3, bird_b_4]
 
 
@@ -24,7 +28,7 @@ bird_x = WIDTH / 2
 bird_y = HEIGHT / 2
 bird_index = 0
 
-
+ballon_out = False
 counter = 0
 forward = True
 running = True
@@ -45,6 +49,8 @@ while running:
         bird_y += SPEED
 
     screen.fill((140, 137, 246))
+    if not ballon_out:
+        screen.blit(ballon_surf, ballon_rect)
     bird_rect = birds_fw[bird_index].get_rect(center=(bird_x, bird_y))
 
     counter += 1
@@ -56,6 +62,10 @@ while running:
         screen.blit(birds_fw[bird_index], bird_rect)
     else:
         screen.blit(birds_b[bird_index], bird_rect)
+
+    if ballon_rect.colliderect(bird_rect):
+        ballon_out = True
+
     pygame.display.update()
     clock.tick(60)
 

@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-bird = pygame.image.load('img/bird1.png')
+bird = pygame.image.load('../02 Animáció/img/bird1.png')
 bird_x = WIDTH / 2
 bird_y = HEIGHT / 2
 
@@ -27,13 +27,13 @@ while running:
         for index, value in enumerate(keys):
             if value:
                 print(f'{index=}  {value=}')
-        bird = pygame.image.load('img/bird1back.png')
+        bird = pygame.image.load('../02 Animáció/img/bird1back.png')
         bird_x += -SPEED
     elif keys[pygame.K_RIGHT] and bird_rect.right <= WIDTH:
         for index, value in enumerate(keys):
             if value:
                 print(f'{index=}  {value=}')
-        bird = pygame.image.load('img/bird1.png')
+        bird = pygame.image.load('../02 Animáció/img/bird1.png')
         bird_x += SPEED
     if keys[pygame.K_UP] and bird_rect.top >= 0:
         bird_y += -SPEED

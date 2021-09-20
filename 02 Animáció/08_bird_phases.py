@@ -1,7 +1,9 @@
 import pygame
 
-pygame.init()
 WIDTH, HEIGHT = 1280, 620
+BG_COLOR = (140, 137, 246)
+
+pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
@@ -22,7 +24,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill((140, 137, 246))
+    screen.fill(BG_COLOR)
 
     counter += 1
     if counter % 10 == 0:
