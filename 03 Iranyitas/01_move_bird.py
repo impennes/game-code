@@ -22,6 +22,7 @@ while running:
     if keys[pygame.K_LEFT] and bird_rect.left >= 0:
         bird = pygame.image.load('../02 Animáció/img/bird1back.png')
         bird_x += -SPEED
+
     elif keys[pygame.K_RIGHT] and bird_rect.right <= WIDTH:
         for index, value in enumerate(keys):
             if value:
