@@ -26,6 +26,7 @@ while running:
             points += 1
 
     game_time = str(int(round(time.time() - time_start, 0)))
+
     time_surf = game_font.render('SEC: ' + game_time, True, FONT_COLOR)
     time_rect = time_surf.get_rect(topleft=(10, 10))
 
