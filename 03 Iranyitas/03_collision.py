@@ -8,23 +8,24 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-ballon = pygame.image.load('img/ballon.png')
-ballon_rect = ballon.get_rect(center=(WIDTH - 100, HEIGHT / 2))
+balloon = pygame.image.load('img/balloon.png').convert_alpha()
+balloon_rect = balloon.get_rect(center=(WIDTH - 100, HEIGHT / 2))
 
-bird_fw_1 = pygame.image.load('img/bird1.png')
-bird_fw_2 = pygame.image.load('img/bird2.png')
-bird_fw_3 = pygame.image.load('img/bird3.png')
-bird_fw_4 = pygame.image.load('img/bird4.png')
+bird_fw_1 = pygame.image.load('img/bird1.png').convert_alpha()
+bird_fw_2 = pygame.image.load('img/bird2.png').convert_alpha()
+bird_fw_3 = pygame.image.load('img/bird3.png').convert_alpha()
+bird_fw_4 = pygame.image.load('img/bird4.png').convert_alpha()
 birds_fw = [bird_fw_1, bird_fw_2, bird_fw_3, bird_fw_4]
-bird_b_1 = pygame.image.load('img/bird1back.png')
-bird_b_2 = pygame.image.load('img/bird2back.png')
-bird_b_3 = pygame.image.load('img/bird3back.png')
-bird_b_4 = pygame.image.load('img/bird4back.png')
+bird_b_1 = pygame.image.load('img/bird1back.png').convert_alpha()
+bird_b_2 = pygame.image.load('img/bird2back.png').convert_alpha()
+bird_b_3 = pygame.image.load('img/bird3back.png').convert_alpha()
+bird_b_4 = pygame.image.load('img/bird4back.png').convert_alpha()
 birds_b = [bird_b_1, bird_b_2, bird_b_3, bird_b_4]
+bird_index = 0
 
 bird_x = WIDTH / 2
 bird_y = HEIGHT / 2
-bird_index = 0
+bird_rect = birds_fw[bird_index].get_rect(center=(bird_x, bird_y))
 
 collision = False
 counter = 0
@@ -50,7 +51,7 @@ while running:
 
     screen.fill((140, 137, 246))
     if not collision:
-        screen.blit(ballon, ballon_rect)
+        screen.blit(balloon, balloon_rect)
 
     counter += 1
     if counter % 7 == 0:
@@ -65,7 +66,7 @@ while running:
         bird_rect = birds_b[bird_index].get_rect(center=(bird_x, bird_y))
         screen.blit(birds_b[bird_index], bird_rect)
 
-    if ballon_rect.colliderect(bird_rect):
+    if balloon_rect.colliderect(bird_rect):
         collision = True
 
     pygame.display.update()

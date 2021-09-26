@@ -6,7 +6,7 @@ BG_COLOR = (140, 137, 246)
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # convert: PyGame könnyebben kezeli a képet, így gyorsabban fut
-bird_surf = pygame.image.load('img/bird1.png').convert_alpha()
+bird_surf = pygame.image.load('img/bird1.png')
 bird_x = 0
 bird_y = 200
 

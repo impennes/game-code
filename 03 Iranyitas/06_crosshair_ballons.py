@@ -9,13 +9,13 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
-ballon_surf = pygame.image.load('img/ballon.png')
+ballon_surf = pygame.image.load('img/balloon.png').convert_alpha()
 ballons_rect = []
 for _ in range(5):
     ballon_rect = ballon_surf.get_rect(center=(random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50)))
     ballons_rect.append(ballon_rect)
 
-crosshair_surf = pygame.image.load('img/crosshair.png')
+crosshair_surf = pygame.image.load('img/crosshair.png').convert_alpha()
 crosshair_rect = crosshair_surf.get_rect(center=(WIDTH / 2, HEIGHT / 2))
 
 running = True
@@ -24,7 +24,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEMOTION:
-            crosshair_rect = crosshair_surf.get_rect(center=(event.pos))
+            crosshair_rect = crosshair_surf.get_rect(center=event.pos)
         if event.type == pygame.MOUSEBUTTONDOWN:
             for index, ballon_rect in enumerate(ballons_rect):
                 if ballon_rect.collidepoint(event.pos):
