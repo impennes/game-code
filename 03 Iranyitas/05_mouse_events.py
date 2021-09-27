@@ -18,7 +18,8 @@ while running:
     # pygame.mouse
     print('az egér pozíciója', pygame.mouse.get_pos())
     print('az egér gombja lenyomva', pygame.mouse.get_pressed())
+    print(pygame.mouse.get_pressed()[0])
     pygame.display.update()
-    clock.tick(1)
+    clock.tick(30)
 
 pygame.quit()
