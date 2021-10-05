@@ -50,8 +50,6 @@ while running:
         bird_y += SPEED
 
     screen.fill((140, 137, 246))
-    if not collision:
-        screen.blit(balloon, balloon_rect)
 
     counter += 1
     if counter % 7 == 0:
@@ -68,6 +66,9 @@ while running:
 
     if balloon_rect.colliderect(bird_rect):
         collision = True
+
+    if not collision:
+        screen.blit(balloon, balloon_rect)
 
     pygame.display.update()
     clock.tick(60)
