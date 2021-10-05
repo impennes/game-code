@@ -1,0 +1,18 @@
+- background image
+- jatek allapota
+
+
+aktív állapot
+-------------
+- időítés: set_timer()
+- játékidő mérése és megjelenítés
+- lufik emelkedése és oldalirányú mozgása
+- elszálló lufik törlése
+- pontszámlálás és megjelenítés
+
+
+nem aktív állapot
+-----------------
+- nyitó / záróképernyő
+- végső pontszám
+- játék inditása

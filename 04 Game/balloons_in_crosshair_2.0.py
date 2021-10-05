@@ -12,9 +12,9 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Balloons in crosshair')
 clock = pygame.time.Clock()
 
-sky_surf = pygame.image.load('img/sky.png').convert_alpha()
-sky_surf = pygame.transform.rotozoom(sky_surf, 0, 1.3)
-sky_rect = sky_surf.get_rect(bottomleft=(0, HEIGHT))
+bg_surf = pygame.image.load('img/sky.png').convert_alpha()
+bg_surf = pygame.transform.rotozoom(bg_surf, 0, 1.3)
+bg_rect = bg_surf.get_rect(bottomleft=(0, HEIGHT))
 
 balloon_surf = pygame.image.load('img/balloon.png').convert_alpha()
 balloons_rect = []
@@ -45,7 +45,7 @@ while running:
         if event.type == balloons_timer:
             balloons_rect.append(balloon_surf.get_rect(center=(randint(50, WIDTH - 50), HEIGHT)))
 
-    screen.blit(sky_surf, sky_rect)
+    screen.blit(bg_surf, bg_rect)
 
     if game_active:
         time_left = int((start_time + GAME_TIME - pygame.time.get_ticks()) / 1000)
@@ -68,17 +68,18 @@ while running:
             if balloon_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed(num_buttons=3)[0]:
                 del balloons_rect[index]
                 score += 1
-
+            # lufik és célkereszt megjelenítése
             screen.blit(balloon_surf, balloon_rect)
             screen.blit(crosshair_surf, crosshair_rect)
 
-            score_surf = game_font.render('score: ' + str(score), True, FONT_COLOR)
-            score_rect = score_surf.get_rect(topleft=(10, 10))
-            screen.blit(score_surf, score_rect)
+        # pontszám és játékidő meghelenítése
+        score_surf = game_font.render('score: ' + str(score), True, FONT_COLOR)
+        score_rect = score_surf.get_rect(topleft=(10, 10))
+        screen.blit(score_surf, score_rect)
 
-            time_left_surf = game_font.render('time left: ' + str(time_left), True, FONT_COLOR)
-            time_left_rect = time_left_surf.get_rect(topleft=(10, 50))
-            screen.blit(time_left_surf, time_left_rect)
+        time_left_surf = game_font.render('time left: ' + str(time_left), True, FONT_COLOR)
+        time_left_rect = time_left_surf.get_rect(topleft=(10, 50))
+        screen.blit(time_left_surf, time_left_rect)
 
     # nyitó- / záróképernyő
     else:
@@ -89,9 +90,9 @@ while running:
 
         # pontszám megjelenítése csak ha nagyobb, mint nulla
         if score:
-            score_msg_surf = game_font.render('SCORE: ' + str(score), True, FONT_COLOR)
-            score_msg_rect = score_msg_surf.get_rect(center=(WIDTH / 2, HEIGHT - 220))
-            screen.blit(score_msg_surf, score_msg_rect)
+            final_score_surf = game_font.render('SCORE: ' + str(score), True, FONT_COLOR)
+            final_score_rect = final_score_surf.get_rect(center=(WIDTH / 2, HEIGHT - 220))
+            screen.blit(final_score_surf, final_score_rect)
 
         # játék indítása
         keys = pygame.key.get_pressed()
