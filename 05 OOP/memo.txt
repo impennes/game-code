@@ -1,0 +1,16 @@
+Sprite Osztály:
+- leszármazottja a Sprite class-nek
+- surface (self.image)
+- rectangle (self.rect)
+
+Megjelenítés:
+- példányt elhelyezni egy Group / SingleGroup-ban
+    Group: több példányt elhelyezése, amlyek nem interaktálnak egymással
+    SingleGroup: egy példány elhelyezése
+    interakció (pl. ütközés) 2 különböző konténer (Group / SingelGroup) között valósulhat meg
+- draw (kirajzolni) / update (frissíteni)
+
+
+3:38:47
+spritecollide(sprite, group, dokill)
+returns a list of collided sprites

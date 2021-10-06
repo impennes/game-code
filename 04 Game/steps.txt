@@ -4,8 +4,8 @@
 
 aktív állapot
 -------------
-- időítés: set_timer()
-- játékidő mérése és megjelenítés
+- időzítés: set_timer()
+- játékidő mérése és megjelenítése
 - lufik emelkedése és oldalirányú mozgása
 - elszálló lufik törlése
 - pontszámlálás és megjelenítés
