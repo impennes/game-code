@@ -97,7 +97,7 @@ pygame.display.set_caption('Ninja')
 clock = pygame.time.Clock()
 
 # létrehoz egy ninja nevű konténert
-ninja = pygame.sprite.GroupSingle()
+ninja = pygame.sprite.GroupSingle(sprite=None)
 # a konténerhez adja a Ninja osztály egy példányát
 player = Ninja()
 ninja.add(player)
