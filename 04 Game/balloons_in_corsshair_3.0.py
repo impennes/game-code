@@ -2,19 +2,19 @@ import pygame
 from random import randint
 
 
-def display_score(score):
+def display_score():
     score_surf = game_font.render('score: ' + str(score), True, FONT_COLOR)
     score_rect = score_surf.get_rect(topleft=(10, 10))
     screen.blit(score_surf, score_rect)
 
 
-def display_final_score(score):
+def display_final_score():
     final_score_surf = game_font.render('SCORE: ' + str(score), True, FONT_COLOR)
     final_score_rect = final_score_surf.get_rect(center=(WIDTH / 2, HEIGHT - 220))
     screen.blit(final_score_surf, final_score_rect)
 
 
-def display_time_left(time_left):
+def display_time_left():
     time_left_surf = game_font.render('time left: ' + str(time_left), True, FONT_COLOR)
     time_left_rect = time_left_surf.get_rect(topleft=(10, 50))
     screen.blit(time_left_surf, time_left_rect)
@@ -92,8 +92,8 @@ while running:
             screen.blit(crosshair_surf, crosshair_rect)
 
         # pontszám és játékidő meghelenítése
-        display_score(score)
-        display_time_left(time_left)
+        display_score()
+        display_time_left()
 
     # nyitó- / záróképernyő
     else:
@@ -104,7 +104,7 @@ while running:
 
         # pontszám megjelenítése csak ha nagyobb, mint nulla
         if score:
-            display_final_score(score)
+            display_final_score()
 
         # játék indítása
         keys = pygame.key.get_pressed()
