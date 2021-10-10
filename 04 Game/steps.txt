@@ -16,3 +16,19 @@ nem aktív állapot
 - nyitó / záróképernyő
 - végső pontszám
 - játék inditása
+
+
+---I
+01 I
+---I
+set_caption
+background image
+
+balloons_timer
+lufik emelkedése, oldalirányú mougása, törlése a képernyő elhagyásakor
+
+találat vizsgálata > pont
+pontszám megjelenítése
+
+hátralévő játékidő kiszámítása
+játékidő megjelenítése

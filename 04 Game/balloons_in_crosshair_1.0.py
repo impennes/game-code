@@ -1,5 +1,5 @@
 import pygame
-from random import randint
+import random
 
 WIDTH = 1280
 HEIGHT = 620
@@ -25,56 +25,50 @@ crosshair_surf = pygame.image.load('img/crosshair.png').convert_alpha()
 crosshair_surf = pygame.transform.rotozoom(crosshair_surf, 0, 0.7)
 crosshair_rect = crosshair_surf.get_rect(center=(WIDTH / 2, HEIGHT / 2))
 
-score = 0
 game_font = pygame.font.SysFont('arial', 30, bold=True)
-title_surf = game_font.render('BALLOON IN CROSSHAIR', True, FONT_COLOR)
-title_rect = title_surf.get_rect(center=(WIDTH / 2, 200))
-run_surf = game_font.render('Press space to run', True, FONT_COLOR)
-run_rect = run_surf.get_rect(center=(WIDTH / 2, HEIGHT - 150))
 
 start_time = pygame.time.get_ticks()
+score = 0
 running = True
-game_active = False
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEMOTION:
             crosshair_rect = crosshair_surf.get_rect(center=event.pos)
-        # lufik létrehozása megadott időpontban
+        # lufik létrehozása megadott időközönként
         if event.type == balloons_timer:
-            balloons_rect.append(balloon_surf.get_rect(center=(randint(50, WIDTH - 50), HEIGHT)))
+            balloons_rect.append(balloon_surf.get_rect(center=(random.randint(50, WIDTH-50), HEIGHT-50)))
 
     screen.blit(bg_surf, bg_rect)
-
-    # hátralévő játékidő kiszámítása
-    time_left = int((start_time + GAME_TIME - pygame.time.get_ticks()) / 1000)
 
     for index, balloon_rect in enumerate(balloons_rect):
         # lufik emelkedése
         balloons_rect[index].top -= BALLOON_SPEED
-        # lufik oldalirányú mougása
-        mov_y = randint(0, 3)
-        if mov_y == 1:
+        # lufik oldalirányí mozgása
+        mov_y = random.randint(0, 3)
+        if mov_y == 0:
             balloons_rect[index].left -= 2
         else:
             balloons_rect[index].left += 2
         # lufik törlése a képernyő elhagyásakor
         if balloons_rect[index].bottom <= -10:
             del balloons_rect[index]
-        # találat vizsgálata
+        # találat viszgálata
         if balloon_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed(num_buttons=3)[0]:
             del balloons_rect[index]
             score += 1
-        # lufik és célkereszt megjelenítése
-        screen.blit(balloon_surf, balloon_rect)
-        screen.blit(crosshair_surf, crosshair_rect)
 
-    # pontszám és játékidő meghelenítése
+        screen.blit(balloon_surf, balloon_rect)
+    screen.blit(crosshair_surf, crosshair_rect)
+
+    # pontszám megjelenítése
     score_surf = game_font.render('score: ' + str(score), True, FONT_COLOR)
     score_rect = score_surf.get_rect(topleft=(10, 10))
     screen.blit(score_surf, score_rect)
 
+    # a hátralévő játékidő számítása és megjelenítése
+    time_left = int((start_time + GAME_TIME - pygame.time.get_ticks()) / 1000)
     time_left_surf = game_font.render('time left: ' + str(time_left), True, FONT_COLOR)
     time_left_rect = time_left_surf.get_rect(topleft=(10, 50))
     screen.blit(time_left_surf, time_left_rect)
