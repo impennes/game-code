@@ -1,3 +1,10 @@
+"""
+- vízszintes mozgás animálása
+- attack mód, és animálása
+- Fruit osztály
+- ütközés vizsgálata (eltünik a gyümölcs)
+"""
+
 import pygame.sprite
 import random
 
@@ -5,7 +12,6 @@ WIDTH = 1280
 HEIGHT = 620
 BG_COLOR = (255, 255, 255)
 NINJA_SPEED = 5
-FONT_COLOR = (27, 131, 142)
 
 
 class Ninja(pygame.sprite.Sprite):
@@ -34,23 +40,28 @@ class Ninja(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE]:
             self.attack_mode = True
             self.attack_animation()
-        elif not keys[pygame.K_SPACE]:
+        else:
             self.attack_mode = False
             self.image = pygame.image.load('img/Idle__000 1.png').convert_alpha()
-        if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
-            self.rect.right += NINJA_SPEED
-            self.ninja_forward = True
-            self.move_animation()
-        if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.left -= NINJA_SPEED
-            self.ninja_forward = False
-            self.move_animation()
 
-    def move_animation(self):
+        if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
+            self.x_movment(NINJA_SPEED)
+            self.ninja_forward = True
+
+        if keys[pygame.K_LEFT] and self.rect.left > 0:
+            self.x_movment(-NINJA_SPEED)
+            self.ninja_forward = False
+
+    def x_movment(self, dx):
+        self.rect.x += dx
+        self.x_movement_animation()
+
+    def x_movement_animation(self):
         if self.ninja_index < len(self.ninja_fw) - 1:
             self.ninja_index += 0.2
         else:
             self.ninja_index = 0
+
         if self.ninja_forward:
             self.image = self.ninja_fw[int(self.ninja_index)]
         else:
@@ -76,7 +87,7 @@ class Fruit(pygame.sprite.Sprite):
             self.image = pygame.image.load('img/banana.png').convert_alpha()
         else:
             self.image = pygame.image.load('img/strawberry.png').convert_alpha()
-        self.rect = self.image.get_rect(center=(random.randint(20, WIDTH - 20), -20))
+        self.rect = self.image.get_rect(center=(random.randint(20, WIDTH-20), -20))
 
     def update(self):
         self.rect.bottom += 5
@@ -88,16 +99,8 @@ class Fruit(pygame.sprite.Sprite):
 
 
 def collision_sprite():
-    global score
-    if player.attack_mode:
-        if pygame.sprite.spritecollide(ninja.sprite, fruit_group, True):
-            score += 1
-
-
-def display_score():
-    score_surf = game_font.render('score: ' + str(score), True, FONT_COLOR)
-    score_rect = score_surf.get_rect(topleft=(10, 10))
-    screen.blit(score_surf, score_rect)
+    if ninja.sprite.__getattribute__('attack_mode'):
+        pygame.sprite.spritecollide(ninja.sprite, fruit_group, True)
 
 
 pygame.init()
@@ -105,20 +108,16 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Ninja')
 clock = pygame.time.Clock()
 
-platform_surf = pygame.image.load('img/platform.png').convert_alpha()
-platform_rect = platform_surf.get_rect(midtop=(WIDTH/2, HEIGHT-150))
 
-# létrehoz egy ninja nevű konténert
-ninja = pygame.sprite.GroupSingle(sprite=None)
-# a konténerhez adja a Ninja osztály egy példányát
-player = Ninja()
-ninja.add(player)
+# ninja = pygame.sprite.GroupSingle(sprite=None)
+# player = Ninja()
+# ninja.add(player)
+
+ninja = pygame.sprite.GroupSingle()
+ninja.add(Ninja())
+
 
 fruit_group = pygame.sprite.Group()
-
-detected = False
-score = 0
-game_font = pygame.font.SysFont('arial', 30, bold=True)
 
 # Timer
 fruit_timer = pygame.USEREVENT + 1
@@ -133,7 +132,6 @@ while running:
             fruit_group.add(Fruit(random.choice(['pear', 'banana', 'strawberry'])))
 
     screen.fill(BG_COLOR)
-    screen.blit(platform_surf, platform_rect)
 
     ninja.draw(screen)
     ninja.update()
@@ -142,7 +140,6 @@ while running:
     fruit_group.update()
 
     collision_sprite()
-    display_score()
 
     pygame.display.update()
     clock.tick(60)

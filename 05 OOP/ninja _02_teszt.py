@@ -1,3 +1,10 @@
+"""
+- vízszintes mozgás animálása
+- attack mód, és animálása
+- Fruit osztály
+- ütközés vizsgálata (eltünik a gyümölcs)
+"""
+
 import pygame.sprite
 import random
 
@@ -25,7 +32,7 @@ class Ninja(pygame.sprite.Sprite):
         self.ninja_index = 0
         self.ninja_forward = True
         self.image = self.ninja_fw[self.ninja_index]
-        self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 100))
+        self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 149))
         self.attack_mode = False
 
     def ninja_input(self):
@@ -33,23 +40,28 @@ class Ninja(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE]:
             self.attack_mode = True
             self.attack_animation()
-        elif not keys[pygame.K_SPACE]:
+        else:
             self.attack_mode = False
             self.image = pygame.image.load('img/Idle__000 1.png').convert_alpha()
-        if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
-            self.rect.right += NINJA_SPEED
-            self.ninja_forward = True
-            self.move_animation()
-        if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.left -= NINJA_SPEED
-            self.ninja_forward = False
-            self.move_animation()
 
-    def move_animation(self):
+        if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
+            self.x_movment(NINJA_SPEED)
+            self.ninja_forward = True
+
+        if keys[pygame.K_LEFT] and self.rect.left > 0:
+            self.x_movment(-NINJA_SPEED)
+            self.ninja_forward = False
+
+    def x_movment(self, dx):
+        self.rect.x += dx
+        self.x_movement_animation()
+
+    def x_movement_animation(self):
         if self.ninja_index < len(self.ninja_fw) - 1:
             self.ninja_index += 0.2
         else:
             self.ninja_index = 0
+
         if self.ninja_forward:
             self.image = self.ninja_fw[int(self.ninja_index)]
         else:

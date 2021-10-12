@@ -9,16 +9,18 @@ NINJA_SPEED = 5
 class Ninja(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('img/Attack__009.png').convert_alpha()
-        self.image = pygame.transform.rotozoom(self.image, 0, 0.4)
+        self.image = pygame.image.load('img/Idle__000 1.png').convert_alpha()
         self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 100))
 
     def ninja_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
-            self.rect.right += NINJA_SPEED
+            self.x_movement(NINJA_SPEED)
         if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.left -= NINJA_SPEED
+            self.x_movement(-NINJA_SPEED)
+
+    def x_movement(self, dx):
+        self.rect.x += dx
 
     def update(self):
         self.ninja_input()
@@ -29,7 +31,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Ninja')
 clock = pygame.time.Clock()
 
-# létrehiz egy ninja nevű konténert
+# létrehoz egy ninja nevű konténert
 ninja = pygame.sprite.GroupSingle()
 # a konténerhez adja a Ninja osztály egy példányát
 ninja.add(Ninja())
