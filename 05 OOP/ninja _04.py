@@ -7,7 +7,6 @@ import random
 WIDTH = 1280
 HEIGHT = 620
 BG_COLOR = (255, 255, 255)
-NINJA_SPEED = 5
 FONT_COLOR = (27, 131, 142)
 
 
@@ -31,6 +30,10 @@ class Ninja(pygame.sprite.Sprite):
         self.image = self.ninja_fw[self.ninja_index]
         self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 149))
         self.attack_mode = False
+        self.speed = 5
+        self.gravity = 1
+        self.jump_speed = -16
+        self.dy = 0
 
     def ninja_input(self):
         keys = pygame.key.get_pressed()
@@ -42,12 +45,21 @@ class Ninja(pygame.sprite.Sprite):
             self.image = pygame.image.load('img/Idle__000 1.png').convert_alpha()
 
         if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
-            self.x_movment(NINJA_SPEED)
+            self.x_movment(self.speed)
             self.ninja_forward = True
-
         if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.x_movment(-NINJA_SPEED)
+            self.x_movment(-self.speed)
             self.ninja_forward = False
+        if keys[pygame.K_UP]:
+            self.jump()
+
+    def apply_gravity(self):
+        self.dy += self.gravity
+        print(f'{self.dy=}')
+        self.rect.y += self.dy
+
+    def jump(self):
+        self.dy = self.jump_speed
 
     def x_movment(self, dx):
         self.rect.x += dx
@@ -73,6 +85,7 @@ class Ninja(pygame.sprite.Sprite):
 
     def update(self):
         self.ninja_input()
+        self.apply_gravity()
 
 
 class Fruit(pygame.sprite.Sprite):
