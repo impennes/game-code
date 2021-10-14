@@ -1,6 +1,5 @@
 """
-- paltform megjelenítése
-- score számolása és megjelenítése
+- 2 platform
 """
 import pygame.sprite
 import random
@@ -31,7 +30,11 @@ class Ninja(pygame.sprite.Sprite):
         self.image = self.ninja_fw[self.ninja_index]
         self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 149))
         self.attack_mode = False
+        self.on_ground = True
         self.speed = 5
+        self.gravity = 1
+        self.jump_speed = -16
+        self.dy = 0
 
     def ninja_input(self):
         keys = pygame.key.get_pressed()
@@ -45,10 +48,26 @@ class Ninja(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
             self.x_movment(self.speed)
             self.ninja_forward = True
-
         if keys[pygame.K_LEFT] and self.rect.left > 0:
             self.x_movment(-self.speed)
             self.ninja_forward = False
+        if keys[pygame.K_UP] and self.on_ground:
+            self.jump()
+
+    def apply_gravity(self):
+        self.dy += self.gravity
+        self.rect.y += self.dy
+
+    def jump(self):
+        self.on_ground = False
+        self.dy = self.jump_speed
+
+    def y_movement_collision(self):
+        for pf_rect in platform_rects:
+            if self.rect.colliderect(pf_rect):
+                self.rect.bottom = pf_rect.top
+                self.dy = 0
+                self.on_ground = True
 
     def x_movment(self, dx):
         self.rect.x += dx
@@ -74,6 +93,8 @@ class Ninja(pygame.sprite.Sprite):
 
     def update(self):
         self.ninja_input()
+        self.apply_gravity()
+        self.y_movement_collision()
 
 
 class Fruit(pygame.sprite.Sprite):
@@ -115,8 +136,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Ninja')
 clock = pygame.time.Clock()
 
-platform_surf = pygame.image.load('img/platform_xxl.png').convert_alpha()
-platform_rect = platform_surf.get_rect(midtop=(WIDTH/2, HEIGHT-150))
+platform_surf = pygame.image.load('img/platform.png').convert_alpha()
+platform_rects = [platform_surf.get_rect(midtop=(WIDTH/2, HEIGHT-150)),
+                  platform_surf.get_rect(midtop=(WIDTH+250, HEIGHT-200))]
+
 
 # létrehoz egy ninja nevű konténert
 ninja = pygame.sprite.GroupSingle()
@@ -142,7 +165,8 @@ while running:
             fruit_group.add(Fruit(random.choice(['pear', 'banana', 'strawberry'])))
 
     screen.fill(BG_COLOR)
-    screen.blit(platform_surf, platform_rect)
+    for platform_rect in platform_rects:
+        screen.blit(platform_surf, platform_rect)
 
     ninja.draw(screen)
     ninja.update()

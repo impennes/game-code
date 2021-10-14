@@ -1,4 +1,5 @@
 """
+- gravitáció
 - ugrás
 """
 import pygame.sprite
@@ -30,6 +31,7 @@ class Ninja(pygame.sprite.Sprite):
         self.image = self.ninja_fw[self.ninja_index]
         self.rect = self.image.get_rect(midbottom=(WIDTH / 2, HEIGHT - 149))
         self.attack_mode = False
+        self.on_ground = True
         self.speed = 5
         self.gravity = 1
         self.jump_speed = -16
@@ -50,16 +52,22 @@ class Ninja(pygame.sprite.Sprite):
         if keys[pygame.K_LEFT] and self.rect.left > 0:
             self.x_movment(-self.speed)
             self.ninja_forward = False
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] and self.on_ground:
             self.jump()
 
     def apply_gravity(self):
         self.dy += self.gravity
-        print(f'{self.dy=}')
         self.rect.y += self.dy
 
     def jump(self):
+        self.on_ground = False
         self.dy = self.jump_speed
+
+    def y_movement_collision(self):
+        if self.rect.colliderect(platform_rect):
+            self.rect.bottom = platform_rect.top
+            self.dy = 0
+            self.on_ground = True
 
     def x_movment(self, dx):
         self.rect.x += dx
@@ -86,6 +94,7 @@ class Ninja(pygame.sprite.Sprite):
     def update(self):
         self.ninja_input()
         self.apply_gravity()
+        self.y_movement_collision()
 
 
 class Fruit(pygame.sprite.Sprite):
@@ -155,6 +164,7 @@ while running:
 
     screen.fill(BG_COLOR)
     screen.blit(platform_surf, platform_rect)
+    # pygame.draw.rect(screen, 'gray', platform_rect, 2)
 
     ninja.draw(screen)
     ninja.update()

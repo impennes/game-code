@@ -16,7 +16,7 @@ ninja_surf = pygame.image.load('img/Idle__000 1.png').convert_alpha()
 ninja_rect = ninja_surf.get_rect(midbottom=(WIDTH/2, HEIGHT-100))
 ground = HEIGHT-95
 
-platform_surf = pygame.image.load('img/platform.png').convert_alpha()
+platform_surf = pygame.image.load('img/platform_xxl.png').convert_alpha()
 platform_rect = platform_surf.get_rect(topleft=(HEIGHT/2-50, ground))
 
 direction_y = 0
