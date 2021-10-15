@@ -28,7 +28,7 @@ class Ninja(pygame.sprite.Sprite):
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Ninja')
+pygame.display.set_caption('Fruit Ninja')
 clock = pygame.time.Clock()
 
 # létrehoz egy ninja nevű konténert

@@ -133,7 +133,7 @@ def display_score():
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Ninja')
+pygame.display.set_caption('Fruit Ninja')
 clock = pygame.time.Clock()
 
 platform_surf = pygame.image.load('img/platform.png').convert_alpha()

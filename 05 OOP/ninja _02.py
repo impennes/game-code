@@ -105,7 +105,7 @@ def collision_sprite():
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Ninja')
+pygame.display.set_caption('Fruit Ninja')
 clock = pygame.time.Clock()
 
 
