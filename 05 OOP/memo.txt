@@ -1,9 +1,11 @@
+átláthatatlan kód > egy egységben
 Sprite Osztály:
 - leszármazottja a Sprite class-nek
 - surface (self.image)
 - rectangle (self.rect)
 
 Megjelenítés:
+- nem hasznaljuk a blit() metódust
 - példányt elhelyezni egy Group / SingleGroup-ban
     Group: több példányt elhelyezése, amlyek nem interaktálnak egymással
     SingleGroup: egy példány elhelyezése

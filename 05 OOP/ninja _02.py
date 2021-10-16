@@ -3,6 +3,7 @@
 - attack mód, és animálása
 - Fruit osztály
 - ütközés vizsgálata (eltünik a gyümölcs)
+- Fejlesztés: gyümölcsök forogjanak esés közben, legyen ritkább gyümölcs
 """
 
 import pygame.sprite
@@ -89,13 +90,13 @@ class Fruit(pygame.sprite.Sprite):
             self.image = pygame.image.load('img/strawberry.png').convert_alpha()
         self.rect = self.image.get_rect(center=(random.randint(20, WIDTH-20), -20))
 
-    def update(self):
-        self.rect.bottom += 5
-        self.destroy()
-
     def destroy(self):
         if self.rect.top > HEIGHT:
             self.kill()
+
+    def update(self):
+        self.rect.bottom += 5
+        self.destroy()
 
 
 def collision_sprite():
