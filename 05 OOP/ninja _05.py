@@ -118,7 +118,8 @@ class Fruit(pygame.sprite.Sprite):
 
 
 def collision_sprite():
-    if ninja.sprite.__getattribute__('attack_mode'):
+    # if ninja.sprite.__getattribute__('attack_mode'):
+    if ninja.sprite.attack_mode:
         if pygame.sprite.spritecollide(ninja.sprite, fruit_group, True):
             return True
     else:
