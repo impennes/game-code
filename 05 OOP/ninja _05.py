@@ -1,5 +1,6 @@
 """
 - 2 platform
+
 """
 import pygame.sprite
 import random
@@ -44,6 +45,9 @@ class Ninja(pygame.sprite.Sprite):
         else:
             self.attack_mode = False
             self.image = pygame.image.load('img/Idle__000 1.png').convert_alpha()
+            # self.rect = self.image.get_rect()
+            rect_center = self.rect.center
+            self.rect = self.image.get_rect(center=rect_center)
 
         if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
             self.x_movment(self.speed)
@@ -171,6 +175,7 @@ while running:
 
     ninja.draw(screen)
     ninja.update()
+    pygame.draw.rect(screen, 'gray', ninja.sprite.rect, 2)
 
     fruit_group.draw(screen)
     fruit_group.update()
