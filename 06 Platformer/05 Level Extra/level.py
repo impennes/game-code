@@ -17,6 +17,13 @@ class Tile(pygame.sprite.Sprite):
         self.rect.x += x_shift
 
 
+class Crate(Tile):
+    def __init__(self, pos, size, type):
+        super().__init__(pos, size, type)
+
+
+
+
 class Level:
     def __init__(self, level_data, surface):
         self.diplay_surface = surface
@@ -25,6 +32,7 @@ class Level:
 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
+        self.crates = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
 
         for row_index, row in enumerate(layout):
@@ -34,9 +42,13 @@ class Level:
                 if cell == 'P':
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
+                elif cell == '1':
+                    crate = Crate()
                 elif cell != ' ':
                     tile = Tile((x, y), tile_size, cell)
                     self.tiles.add(tile)
+
+
 
     def scroll_x(self):
         player = self.player.sprite

@@ -22,7 +22,7 @@ level_map = [
 '                            ',
 '                            ',
 '             noop           ',
-'  bP                        ',
+'  bP 1                      ',
 'bbbbbbc    abbb   XX  XXX   ',
 'eeeeeef   aheeee  XX  XXXX  ']
 
