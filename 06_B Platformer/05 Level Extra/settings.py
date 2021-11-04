@@ -22,9 +22,9 @@ level_map = [
 '                            ',
 '                            ',
 '             noop           ',
-'  bP 1                      ',
-'bbbbbbc    abbb   XX  XXX   ',
-'eeeeeef   aheeee  XX  XXXX  ']
+'  bP                        ',
+'bbbbbbc    abbb   bb  bbb   ',
+'eeeeeef   aheeee  bb  bbbb  ']
 
 
 tile_size = 64
