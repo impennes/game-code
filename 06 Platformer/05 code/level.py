@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 from player import Player
-from tiles import Tile, TerrainTile
+from tiles import TerrainTile, Crate
 
 
 class Level:
@@ -10,6 +10,7 @@ class Level:
         self.world_shift = 0
         self.player = pygame.sprite.GroupSingle()
         self.terrain_tiles = pygame.sprite.Group()
+        self.crates = pygame.sprite.Group()
         self.setup_level(level_data)
 
     def setup_level(self, layout):
@@ -20,6 +21,9 @@ class Level:
                 if tile_type == 'P':
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
+                elif tile_type == 'T':
+                    tile = Crate(tile_size, x, y)
+                    self.crates.add(tile)
                 elif tile_type != ' ':
                     tile = TerrainTile(tile_size, x, y, tile_type)
                     self.terrain_tiles.add(tile)
@@ -70,5 +74,7 @@ class Level:
         self.vertical_movement_collision()
         self.terrain_tiles.update(self.world_shift)
         self.terrain_tiles.draw(self.diplay_surface)
+        self.crates.update(self.world_shift)
+        self.crates.draw(self.diplay_surface)
         self.scroll_x()
         self.player.draw(self.diplay_surface)
