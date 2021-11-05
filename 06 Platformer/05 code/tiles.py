@@ -1,4 +1,5 @@
 import pygame
+from settings import others
 
 
 class Tile(pygame.sprite.Sprite):
@@ -35,3 +36,12 @@ class Crate(Tile):
         if self.image_index > len(self.image_list):
             self.image_index = 0
         self.image = self.image_list[int(self.image_index)]
+
+
+class OtherTile(Tile):
+    def __init__(self, size, x, y, type):
+        super().__init__(size, x, y)
+        print(others[type], type)
+        self.image = pygame.image.load(f'../img/others/{others[type]}.png').convert_alpha()
+        offset_y = y + size
+        self.rect = self.image.get_rect(bottomleft=(x, offset_y))

@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 from player import Player
-from tiles import TerrainTile, Crate
+from tiles import TerrainTile, Crate, OtherTile
 
 
 class Level:
@@ -11,6 +11,7 @@ class Level:
         self.player = pygame.sprite.GroupSingle()
         self.terrain_tiles = pygame.sprite.Group()
         self.crates = pygame.sprite.Group()
+        self.other_tiles = pygame.sprite.Group()
         self.setup_level(level_data)
 
     def setup_level(self, layout):
@@ -24,6 +25,9 @@ class Level:
                 elif tile_type == 'T':
                     tile = Crate(tile_size, x, y)
                     self.crates.add(tile)
+                elif tile_type in others:
+                    tile = OtherTile(tile_size, x, y, tile_type)
+                    self.other_tiles(tile)
                 elif tile_type != ' ':
                     tile = TerrainTile(tile_size, x, y, tile_type)
                     self.terrain_tiles.add(tile)
