@@ -45,3 +45,8 @@ class OtherTile(Tile):
         self.image = pygame.image.load(f'../img/others/{others[type]}.png').convert_alpha()
         offset_y = y + size
         self.rect = self.image.get_rect(bottomleft=(x, offset_y))
+
+    def update(self, shift):
+        self.rect.x += shift
+
+

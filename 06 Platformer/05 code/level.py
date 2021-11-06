@@ -1,7 +1,8 @@
 import pygame
 from settings import *
 from player import Player
-from tiles import TerrainTile, Crate, OtherTile
+from tiles import Tile, TerrainTile, Crate, OtherTile
+from enemy import Enemy
 
 
 class Level:
@@ -12,6 +13,8 @@ class Level:
         self.terrain_tiles = pygame.sprite.Group()
         self.crates = pygame.sprite.Group()
         self.other_tiles = pygame.sprite.Group()
+        self.enemies = pygame.sprite.Group()
+        self.constraints = pygame.sprite.Group()
         self.setup_level(level_data)
 
     def setup_level(self, layout):
@@ -25,9 +28,14 @@ class Level:
                 elif tile_type == 'T':
                     tile = Crate(tile_size, x, y)
                     self.crates.add(tile)
+                elif tile_type == 'E':
+                    self.enemies.add(Enemy(tile_size, x, y))
+                elif tile_type == 'C':
+                    constraint = Tile(tile_size, x, y)
+                    self.constraints.add(constraint)
                 elif tile_type in others:
                     tile = OtherTile(tile_size, x, y, tile_type)
-                    self.other_tiles(tile)
+                    self.other_tiles.add(tile)
                 elif tile_type != ' ':
                     tile = TerrainTile(tile_size, x, y, tile_type)
                     self.terrain_tiles.add(tile)
@@ -72,6 +80,11 @@ class Level:
                     player.rect.top = sprite.rect.bottom
                     player.direction.y = 0
 
+    def enemy_collision_reverse(self):
+        for enemy in self.enemies.sprites():
+            if pygame.sprite.spritecollide(enemy, self.constraints, False):
+                enemy.reverse()
+
     def run(self):
         self.player.update()
         self.horizontal_movement_collision()
@@ -80,5 +93,11 @@ class Level:
         self.terrain_tiles.draw(self.diplay_surface)
         self.crates.update(self.world_shift)
         self.crates.draw(self.diplay_surface)
+        self.other_tiles.update(self.world_shift)
+        self.other_tiles.draw(self.diplay_surface)
+        self.enemies.draw(self.diplay_surface)
+        self.constraints.update(self.world_shift)
+        self.enemy_collision_reverse()
+        self.enemies.update(self.world_shift)
         self.scroll_x()
         self.player.draw(self.diplay_surface)
