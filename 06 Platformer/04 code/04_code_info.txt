@@ -1,0 +1,29 @@
+Animation
+-----------
+Sok kép hatékony beolvasása és tárolása:
+animations = {
+    'idle': ['Idle__000.png', 'Idle__001.png', 'Idle__002.png', 'Idle__003.png'],
+    'run': ['Run__000.png', 'Run__001.png', 'Run__002.png', 'Run__003.png'],
+    'jump': ['Jump__000.png', 'Jump__001.png', 'Jump__002.png', 'Jump__003.png']
+}
+
+Player class:
+        self.animations = {'idle': [], 'run': [], 'jump': []}
+        self.import_character_assets()
+        self.frame_index = 0
+        self.animation_speed = 0.15
+        self.image = self.animations['idle'][self.frame_index]
+
+        self.status = 'idle'
+        self.facing_right = True
+
+        def import_character_assets(self)
+
+        def get_status(self):
+        def animate(self):
+
+support.py: mozgásfázisok betöltése
+            from os import walk >> test
+
+
+
