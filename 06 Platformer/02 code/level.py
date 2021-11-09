@@ -1,0 +1,56 @@
+import pygame
+from settings import tile_size
+from tiles import TerrainTile
+from player import Player
+
+
+class Level:
+    def __init__(self, level_data, surface):
+        self.display_surface = surface
+        self.terrain_tiles = pygame.sprite.Group()
+        self.player = pygame.sprite.GroupSingle()
+        self.setup_level(level_data)
+
+    def setup_level(self, layout):
+        for row_index, row in enumerate(layout):
+            for col_index, tile_type in enumerate(row):
+                x = col_index * tile_size
+                y = row_index * tile_size
+                if tile_type == 'P':
+                    player_sprite = Player((x, y))
+                    self.player.add(player_sprite)
+                elif tile_type != ' ':
+                    tile = TerrainTile(tile_size, x, y, tile_type)
+                    self.terrain_tiles.add(tile)
+
+    def horizontal_movement_collision(self):
+        player = self.player.sprite
+        player.rect.x += player.direction.x * player.speed
+
+        for sprite in self.terrain_tiles.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.x < 0:
+                    player.rect.left = sprite.rect.right
+                elif player.direction.x > 0:
+                    player.rect.right = sprite.rect.left
+
+    def vertical_movement_collision(self):
+        player = self.player.sprite
+        player.apply_gravity()
+
+        for sprite in self.terrain_tiles.sprites():
+            if sprite.rect.colliderect(player.rect):
+                if player.direction.y > 0:
+                    player.rect.bottom = sprite.rect.top
+                    player.direction.y = 0
+                    player.on_ground = True
+                elif player.direction.y < 0:
+                    player.rect.top = sprite.rect.bottom
+                    player.direction.y = 0
+
+    def run(self):
+        self.player.update()
+        self.horizontal_movement_collision()
+        self.vertical_movement_collision()
+        self.terrain_tiles.draw(self.display_surface)
+        self.player.draw(self.display_surface)

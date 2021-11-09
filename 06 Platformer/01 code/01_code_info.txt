@@ -1,0 +1,15 @@
+Level
+-------
+0,
+forrás: Clear Code: Mario
+https://www.youtube.com/watch?v=KJpP85tnOKg&list=PL8ui5HK3oSiGXM2Pc2DahNu1xXBf7WQh-
+
+1,
+settings.py: screen_width, screen_height
+import > from ... import
+
+2,
+settings.py: level_map, resposive screen_height + tile_size
+tile.py: Tile > TerrainTile
+Level class: coupling of objects (!)
+             self.terrain_tiles >> TerrainTile típusú obejktumokat tartalmazó sprite.Group

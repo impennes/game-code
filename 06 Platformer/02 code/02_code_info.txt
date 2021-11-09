@@ -1,0 +1,13 @@
+Player (mozgás, ugrás, gravitáció, animáció nélkül)
+---------------------------------------------------
+1,
+Player class
+Vector
+Level coupling Player()
+
+2,
+setting.py level_map -re plyaert rávinni
+Level:
+self.player
+mozgással kapcsolatos metódusok
+

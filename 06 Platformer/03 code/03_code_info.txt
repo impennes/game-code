@@ -1,0 +1,12 @@
+Scroll
+-------
+
+Tile: def update
+
+Level:
+self.world_shift
+def scroll_x()
+def run() kieg:
+    self.terrain_tiles.update(self.world_shift)
+    this.scroll_x()
+
