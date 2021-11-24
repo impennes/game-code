@@ -9,7 +9,7 @@ class Enemy(Tile):
         self.image = pygame.image.load('../img/enemy/enemy.png').convert_alpha()
         offset_y = y + size
         self.rect = self.image.get_rect(bottomleft=(x, offset_y))
-        self.speed = randint(1, 4)
+        self.speed = randint(1, 3)
 
     def move(self):
         self.rect.x += self.speed

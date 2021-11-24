@@ -15,15 +15,15 @@ player: P
 level_map = [
 '                            ',
 '                            ',
-'                            ',
-'                            ',
-'                            ',
-'                            ',
-'            CE1E4C          ',
-'             noop           ',
-' 54P21T    2 2    2         ',
-'bbbbbbc   2abbc   ac  abc   ',
-'eeeeeef   aheejc  df  dejc  ']
+'          T2                 ',
+'          np                ',
+'    C135EC                  ',
+'     noop                   ',
+'1T          CE1E45TC        ',
+'np           noooop         ',
+'431P25T    232    2T  322T1 ',
+'abbbbbc   2abbcT  ac  abbbc ',
+'deeeeef   aheejc  df  deeejc']
 
 
 tile_size = 64

@@ -4,8 +4,8 @@ import pygame
 class UI:
     def __init__(self, surface):
         self.display_surface = surface
-        self.heart_surf = pygame.image.load('../img/heart.png').convert_alpha()
-        self.crate_surf = pygame.image.load('../img/crate.png').convert_alpha()
+        self.heart_surf = pygame.image.load('../img/game_info/heart.png').convert_alpha()
+        self.crate_surf = pygame.image.load('../img/game_info/crate.png').convert_alpha()
         self.font = pygame.font.Font('../img/font/ARCADEPI.ttf', 30)
 
     def show_health(self, h_current):

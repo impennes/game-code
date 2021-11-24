@@ -2,12 +2,12 @@ level_map = [
 '                            ',
 '                            ',
 '                            ',
+'          np                ',
 '                            ',
+'     noop                   ',
 '                            ',
-'                            ',
-'                            ',
-'             noop           ',
-'P                           ',
+'op           noop           ',
+'    P                       ',
 'bbbbbbc    abbc   ac  abc   ',
 'eeeeeef   aheejc  df  dejc  ']
 

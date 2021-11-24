@@ -1,0 +1,7 @@
+pálya széli csempék igazítása
+
+Kiegésztíő elemek
+map-es szerkezet a sokféle elem kezelésére
+láda
+
+ellenség
